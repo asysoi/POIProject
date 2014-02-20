@@ -239,6 +239,7 @@ public class CarnetApplication {
 			app.init();
 			app.open();
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOG.info(e.getMessage());
 		}
 	}

@@ -10,7 +10,8 @@ public class Address {
 	private String eline = "";
 	private String house = "";
 	private String office = "";
-  
+	private AddressType type; 
+    
 	public Country getCountry() {
 		return country;
 	}
@@ -125,7 +126,16 @@ public class Address {
 		adr.setLine(line);
 		adr.setOffice(office);
 		adr.setId(id);
+		adr.setType(type);
 		return adr;
+	}
+
+	public AddressType getType() {
+		return type;
+	}
+
+	public void setType(AddressType type) {
+		this.type = type;
 	}
 
 

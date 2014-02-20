@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import com.belcci.carnet.config.ImageBox;
 import com.belcci.carnet.model.Address;
+import com.belcci.carnet.model.AddressType;
 import com.belcci.carnet.model.Company;
 import com.belcci.carnet.model.CountryList;
 import com.belcci.carnet.model.Party;
@@ -128,10 +129,23 @@ public class CompanyRepositoryLoader {
 					addr.setOffice(tagvalue);
 				} else if ("city".equals(tagname)) {
 					addr.setCity(tagvalue);
+				} else if ("type".equals(tagname)) {
+					addr.setType(convertStringToAddressType(tagvalue));
 				}
 			}
 		}
 		return addr;
+	}
+
+	private AddressType convertStringToAddressType(String tagvalue) {
+		if ("WORK".equals(tagvalue)) {
+			return AddressType.WORK;
+		} else if ("HOME".equals(tagvalue)) {
+			return AddressType.HOME;
+		} else if ("MAIL".equals(tagvalue)) {
+			return AddressType.WORK;
+		}
+		return AddressType.WORK;
 	}
 
 	public void save(CompanyRepository repository) {

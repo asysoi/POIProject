@@ -84,6 +84,7 @@ public class PersonForm extends Dialog {
 		shell.open();
 		shell.layout();
 		Display display = getParent().getDisplay();
+		
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();

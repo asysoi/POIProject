@@ -192,5 +192,18 @@ public class Party {
 		return adrs;
 	}
 
+	public Address findAddressByType(AddressType type) {
+		Address ret = null;
+		
+		for (Address adr: addresses) {
+			if (adr.getType() == type) {
+				ret = adr;
+				break;
+			}
+		}
+		return  ret;
+	}
+
     
+	
 }
