@@ -980,8 +980,25 @@ public class CarnetApplication {
 		*/
 		
 		fillInCurrencyList(new String[] { "USD", "EUR", "BYR" });
+		fillInTargetsList(cbTarget);
+		fillInType(cbType);
+		
 	}
 
+	private void fillInType(CCombo cb) {
+		cb.removeAll();
+		for (ProductType type : ProductTypeList.getInstance()) {
+			cb.add(type.getName() != null ? type.getName() : "");
+		}
+	}
+
+	private void fillInTargetsList(CCombo cb) {
+		cb.removeAll();
+		for (Target type : TargetList.getInstance()) {
+			cb.add(type.getName() != null ? type.getName() : "");
+		}
+	}
+	
 	protected void openPartyListForm(boolean isPerson, boolean isHolder,
 			Text name, Label desc) {
 		PartyListForm pform = new PartyListForm(shell, SWT.ICON_INFORMATION
