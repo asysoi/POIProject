@@ -56,6 +56,8 @@ import org.eclipse.swt.widgets.TableItem;
 import com.belcci.carnet.builder.CarnetPDFBuilder;
 import com.belcci.carnet.command.AddHolder;
 import com.belcci.carnet.command.Command;
+import com.belcci.carnet.config.CarnetConfig;
+import com.belcci.carnet.config.CarnetConfigurator;
 import com.belcci.carnet.config.ConfigReader;
 import com.belcci.carnet.config.XMLConfigReader;
 import com.belcci.carnet.form.CarnetApplication.LoadConfig;
@@ -88,6 +90,7 @@ import com.belcci.carnet.persistence.PersonRepository;
 import com.belcci.carnet.persistence.PersonRepositoryLoader;
 import com.belcci.carnet.persistence.ProductTypeList;
 import com.belcci.carnet.persistence.TargetList;
+import com.belcci.otrs.util.DesEncrypter;
 
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.layout.FillLayout;
@@ -130,6 +133,49 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 
 public class CarnetApplication {
+	public static final String M_LOGIN = "Войти";
+	public static final String M_LOGOFF = "Выйти";
+	public static final String M_TICKETS = "Список новых заявок";
+	public static final String M_LOG = "Журнал событий";
+	public static final String M_REPORT = "Отчет";
+	public static final String M_LINK = "Перейти в OTRS";
+	public static final String M_PROPERTY = "Параметры";
+	public static final String M_EXIT = "Закрыть";
+	public static final String APP_TIPS = "Электронная заявка";
+	public static final String TAG_ERROR = "Error";
+	public static final String TAG_SESSIONCREATE_RESP = "SessionCreateResponse";
+	public static final String TAG_SESSIONID = "SessionID";
+	public static final String TAG_TICKET_SEARCH_RESP = "TicketSearchResponse";
+	public static final String TAG_TICKETID = "TicketID";
+	public static final String TAG_TICKETGET_RESP = "TicketGetResponse";
+	public static final String OPR_TICKET_SEARCH = "TicketSearch";
+	public static final String OPR_SESSION_CREATE = "SessionCreate";
+	public static final String OPR_TICKET_GET = "TicketGet";
+	public static final String TAG_USERLOGIN = "UserLogin";
+	public static final String TAG_PASSWORD = "Password";
+	public static final String PR_LOGIN = "Login";
+	public static final String PR_PSW = "Password";
+	public static final String PR_LOGIN_SAVE = "SaveLogin";
+	public static final String PR_CHEK_MYQUEUE = "CheckMyQueue";
+	public static final String PR_REMINDER = "Reminder";
+	public static final String PR_SINGLE_WINDOW = "SingleWindow";
+	public static final String PR_SOUND = "Sound";
+	public static final String PR_CONFIRMATION = "Confirmation";
+	public static final String PR_CHECK_TIME = "CheckTime";
+	public static final String PR_LAST_TICKETID = "LastTicketID";
+	public static final String PR_WEBSERVICE_NAMESPACE = "OTRSWebserviceNamespace";
+	public static final String PR_WEBSERVICE_URL = "OTRSWebserviceURL";
+	public static final String VL_STATE_NEW = "new";
+	public static final String TAG_STATE = "State";
+	public static final String TAG_STATES = "States";
+	public static final String PR_AUTOLOGIN = "AutoLogin";
+	public static final String PR_OTRS_URL = "OTRS_URL";
+	public static final String PR_PATH = "BrowserPath";
+	public static final String PR_PAGE_CONFIG_FILE = "PageConfigurationFile";
+	public static final String PR_COMPANY_REPO_FILE = "CompanyRepositiryFile";
+	public static final String PR_PERSON_REPO_FILE = "PersonRepositoryFile";
+	
+	public static Logger LOG = Logger.getLogger("CarnetATA");
 	private final String STR_COUNTRYTARGET = "Страна назначения";
 	private final String STR_COUNTRYTRANSIT = "Страна транзита";
 	private Party holderParty;
@@ -144,7 +190,6 @@ public class CarnetApplication {
 	private OleClientSite clientSite;
 	private OleFrame frame;
 	private Menu menu;
-	private Label txtConfig;
 	private List listCarnet;
 	private int carnetNumber = 1;
 	private int currentNumber = 0;
@@ -190,13 +235,39 @@ public class CarnetApplication {
 	 */
 	public static void main(String[] args) {
 		try {
-			CarnetApplication window = new CarnetApplication();
-			window.open();
+			CarnetApplication app = new CarnetApplication();
+			app.init();
+			app.open();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.info(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Init application
+	 */
+	private void init() {
+		try {
+			LOG.info("Read application config file");
+			CarnetConfig props = CarnetConfig.getInstance();
+			// load carnet config
+			props.setProperties(CarnetConfigurator.getInstance().readConfig());
+			// password decryption
+			DesEncrypter encrypter = new DesEncrypter();
+			props.setProperty(CarnetApplication.PR_PSW, encrypter.decrypt(props.getProperty(CarnetApplication.PR_PSW)));
+			// load page configuration
+			loadPageConfig(props.getProperty(CarnetApplication.PR_PAGE_CONFIG_FILE));
+			// load company repository
+			CompanyRepositoryLoader.getInstance(props.getProperty(CarnetApplication.PR_COMPANY_REPO_FILE)).load();
+			// load person repository
+			PersonRepositoryLoader.getInstance(props.getProperty(CarnetApplication.PR_PERSON_REPO_FILE)).load();
+		} catch (FileNotFoundException ex) {
+			LOG.warn("Configuration file is not available ...");
+		} catch (Exception ex) {
+			LOG.error(ex.getMessage());
+		}
+	}
+	
 	/**
 	 * Open the window.
 	 */
@@ -206,6 +277,7 @@ public class CarnetApplication {
 		shell.pack();
 		shell.open();
 		shell.layout();
+		
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -273,13 +345,13 @@ public class CarnetApplication {
 				.setText("&\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u041A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044E \u0421\u0442\u0440\u0430\u043D\u0438\u0446\tCTRL+Z");
 		mnConfigItem.setAccelerator(SWT.CTRL + 'L');
 
-		MenuItem mnCompanyRepository = new MenuItem(carnetmenu, SWT.NONE);
-		mnCompanyRepository
-				.setText("\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0421\u043F\u0438\u0441\u043E\u043A \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0439");
+		//MenuItem mnCompanyRepository = new MenuItem(carnetmenu, SWT.NONE);
+		//mnCompanyRepository
+		//		.setText("\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0421\u043F\u0438\u0441\u043E\u043A \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0439");
 
-		MenuItem mnPersonRepository = new MenuItem(carnetmenu, SWT.NONE);
-		mnPersonRepository
-				.setText("\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0421\u043F\u0438\u0441\u043E\u043A \u0424\u0438\u0437\u043B\u0438\u0446");
+		//MenuItem mnPersonRepository = new MenuItem(carnetmenu, SWT.NONE);
+		//mnPersonRepository
+		//		.setText("\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0421\u043F\u0438\u0441\u043E\u043A \u0424\u0438\u0437\u043B\u0438\u0446");
 
 		final MenuItem separator = new MenuItem(carnetmenu, SWT.SEPARATOR);
 		final MenuItem exitItem = new MenuItem(carnetmenu, SWT.PUSH);
@@ -374,7 +446,7 @@ public class CarnetApplication {
 		cbTarget.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				System.out.println("Target selected ");
+				LOG.debug("Target selected ");
 				if (isModifiable) {
 					carnet.setTarget(TargetList.getInstance().findTargetByName(
 							cbTarget.getText()));
@@ -392,7 +464,7 @@ public class CarnetApplication {
 		cbType.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				System.out.println("cbType selected ");
+				LOG.debug("cbType selected ");
 				if (isModifiable) {
 					carnet.setProductType(ProductTypeList.getInstance()
 							.findProductTypeByName(cbType.getText()));
@@ -598,7 +670,7 @@ public class CarnetApplication {
 		txtValue.addVerifyListener(new DigitalListener());
 		txtValue.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
-				System.out.println("Value: " + txtValue.getText());
+				LOG.debug("Value: " + txtValue.getText());
 				if (isModifiable) {
 					carnet.getGoodsTotal().setValue(
 							Double.parseDouble(txtValue.getText()));
@@ -618,7 +690,7 @@ public class CarnetApplication {
 		txtFee.addVerifyListener(new DigitalListener());
 		txtFee.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {
-				System.out.println("Fee: " + txtFee.getText());
+				LOG.debug("Fee: " + txtFee.getText());
 				if (isModifiable) {
 					carnet.getGoodsTotal().setFee(
 							Double.parseDouble(txtFee.getText()));
@@ -827,18 +899,12 @@ public class CarnetApplication {
 		tabPdf.setText("\u041A\u0430\u0440\u043D\u0435\u0442");
 		browser = new Browser(tabFolder, SWT.BORDER);
 		tabPdf.setControl(browser);
+		
+				TabItem tabClaim = new TabItem(tabFolder, SWT.NONE);
+				tabClaim.setText("\u041F\u0440\u0435\u0442\u0435\u043D\u0437\u0438\u0438");
 
 		TabItem tabFInansial = new TabItem(tabFolder, SWT.NONE);
 		tabFInansial.setText("\u0414\u043E\u0433\u043E\u0432\u043E\u0440");
-
-		TabItem tabClaim = new TabItem(tabFolder, SWT.NONE);
-		tabClaim.setText("\u041F\u0440\u0435\u0442\u0435\u043D\u0437\u0438\u0438");
-
-		TabItem tabConfig = new TabItem(tabFolder, SWT.NONE);
-		tabConfig.setText("Config");
-
-		txtConfig = new Label(tabFolder, SWT.WRAP);
-		tabConfig.setControl(txtConfig);
 
 		TabItem tabWord = new TabItem(tabFolder, SWT.NONE);
 		tabWord.setText("\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B");
@@ -867,6 +933,7 @@ public class CarnetApplication {
 		listCarnet.setMenu(popupMenu);
 		stackLayout.topControl = carnetForm;
 
+		/*
 		mnCompanyRepository.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				FileDialog fd = new FileDialog(shell, SWT.OPEN);
@@ -875,7 +942,7 @@ public class CarnetApplication {
 				String[] filterExt = { "*.xml", "*.*" };
 				fd.setFilterExtensions(filterExt);
 				String selected = fd.open();
-				System.out.println(selected);
+				LOG.debug(selected);
 
 				if (selected != null && !selected.isEmpty()) {
 					CompanyRepositoryLoader.getInstance(selected).load();
@@ -885,11 +952,11 @@ public class CarnetApplication {
 					switchTo(chkRepPerson.getSelection(), lblRepParty,
 							txtRepParty, txtRepDescription);
 				}
-
 			}
-
 		});
+		*/
 
+		/*
 		mnPersonRepository.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				FileDialog fd = new FileDialog(shell, SWT.OPEN);
@@ -898,7 +965,7 @@ public class CarnetApplication {
 				String[] filterExt = { "*.xml", "*.*" };
 				fd.setFilterExtensions(filterExt);
 				String selected = fd.open();
-				System.out.println(selected);
+				LOG.debug(selected);
 
 				if (selected != null && !selected.isEmpty()) {
 					PersonRepositoryLoader.getInstance(selected).load();
@@ -910,6 +977,9 @@ public class CarnetApplication {
 				}
 			}
 		});
+		*/
+		
+		fillInCurrencyList(new String[] { "USD", "EUR", "BYR" });
 	}
 
 	protected void openPartyListForm(boolean isPerson, boolean isHolder,
@@ -1005,7 +1075,7 @@ public class CarnetApplication {
 			String[] filterExt = { "*.docx", "*.doc", "*.*" };
 			fd.setFilterExtensions(filterExt);
 			String selected = fd.open();
-			System.out.println(selected);
+			LOG.debug(selected);
 
 			if (selected != null && !selected.isEmpty()) {
 				if (carnet == null) {
@@ -1041,37 +1111,11 @@ public class CarnetApplication {
 			String[] filterExt = { "*.xml", "*.*" };
 			fd.setFilterExtensions(filterExt);
 			String selected = fd.open();
-			System.out.println(selected);
+			LOG.debug(selected);
 
 			if (selected != null && !selected.isEmpty()) {
 				carnetConfigFileName = selected;
-				ConfigReader xreader = XMLConfigReader
-						.getInstance(carnetConfigFileName);
-				xreader.getCountryList();
-				xreader.getJobList();
-				xreader.getTargetList();
-				xreader.getProductTypeList();
-
-				CountryList.getInstance().sort(false);
-				txtConfig.setText(readConfigFile(carnetConfigFileName));
-
-				fillInTargetsList(cbTarget);
-				fillInType(cbType);
-				fillInCurrencyList(new String[] { "USD", "EUR", "BYR" });
-			}
-		}
-
-		private void fillInType(CCombo cb) {
-			cb.removeAll();
-			for (ProductType type : ProductTypeList.getInstance()) {
-				cb.add(type.getName() != null ? type.getName() : "");
-			}
-		}
-
-		private void fillInTargetsList(CCombo cb) {
-			cb.removeAll();
-			for (Target type : TargetList.getInstance()) {
-				cb.add(type.getName() != null ? type.getName() : "");
+				loadPageConfig(carnetConfigFileName);
 			}
 		}
 
@@ -1121,7 +1165,7 @@ public class CarnetApplication {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				System.out.println(selected);
+				LOG.debug(selected);
 				if (browser != null) {
 					browser.setUrl(selected);
 				}
@@ -1136,9 +1180,20 @@ public class CarnetApplication {
 		long start = System.currentTimeMillis();
 		CarnetReader wreader = new WordReader();
 		wreader.loadCarnetATA(carnet, fileName);
-		System.out.println("Duration: " + (System.currentTimeMillis() - start));
+		LOG.debug("Duration: " + (System.currentTimeMillis() - start));
 		wreader = null;
 	}
+
+	public void loadPageConfig(String carnetConfigFileName) {
+		ConfigReader xreader = XMLConfigReader
+				.getInstance(carnetConfigFileName);
+		xreader.getCountryList();
+		xreader.getJobList();
+		xreader.getTargetList();
+		xreader.getProductTypeList();
+		CountryList.getInstance().sort(false);
+	}
+
 
 	public void fillInCurrencyList(String[] clist) {
 		cbCurrency.removeAll();
@@ -1151,7 +1206,7 @@ public class CarnetApplication {
 		boolean needsetvisible = false;
 
 		if (tblGoods.isVisible()) {
-			System.out.println("Goods are not visible");
+			LOG.debug("Goods are not visible");
 			tblGoods.setVisible(false);
 			needsetvisible = true;
 		}
@@ -1180,7 +1235,7 @@ public class CarnetApplication {
 		while (iterator.hasNext()) {
 			ProductItem product = iterator.next();
 			TableItem item = new TableItem(tblGoods, SWT.NONE);
-			System.out.println("Output Row : " + product.getFirstNumber());
+			LOG.debug("Output Row : " + product.getFirstNumber());
 			item.setText(0, product.getFirstNumber());
 			item.setText(1, product.getDescription());
 			item.setText(2, "" + product.getCount());
@@ -1197,7 +1252,7 @@ public class CarnetApplication {
 
 		if (needsetvisible) {
 			tblGoods.setVisible(true);
-			System.out.println("Goods are  visible");
+			LOG.debug("Goods are  visible");
 		}
 	}
 
@@ -1260,7 +1315,7 @@ public class CarnetApplication {
 
 		if (needsetvisible) {
 			tblReport.setVisible(true);
-			System.out.println("Report is visible");
+			LOG.debug("Report is visible");
 		}
 	}
 
@@ -1283,7 +1338,7 @@ public class CarnetApplication {
 			PrinterData printerData = printDialog.open();
 
 			if (!(printerData == null)) {
-				System.out.println(printerData);
+				LOG.debug(printerData);
 				printerselected = printerData.name;
 			}
 		}
@@ -1301,7 +1356,7 @@ public class CarnetApplication {
 			String[] filterExt = { "*.pdf" };
 			fd.setFilterExtensions(filterExt);
 			String selected = fd.open();
-			System.out.println(selected);
+			LOG.debug(selected);
 
 			if (!selected.isEmpty()) {
 				printPDFFile(selected, printerselected);
@@ -1380,10 +1435,10 @@ public class CarnetApplication {
 		if (ps.length == 0) {
 			throw new IllegalStateException("No Printer found");
 		}
-		System.out.println("Available printers: " + Arrays.asList(ps));
+		LOG.debug("Available printers: " + Arrays.asList(ps));
 
 		PrintService myService = null;
-		System.out.println(printername);
+		LOG.debug(printername);
 		for (PrintService printService : ps) {
 			if (printService.getName().equals(printername)) {
 				myService = printService;
@@ -1403,7 +1458,7 @@ public class CarnetApplication {
 			printJob.print(pdfDoc, new HashPrintRequestAttributeSet());
 			fis.close();
 		} catch (Exception ex) {
-
+            LOG.error(ex.getMessage());    
 		}
 
 	}
@@ -1510,12 +1565,12 @@ public class CarnetApplication {
 			int sel = 0;
 			for (String item : cbType.getItems()) {
 				if (item.equals(product.getName())) {
-					System.out.println("selectType: "
+					LOG.debug("selectType: "
 							+ cbType.getSelectionIndex() + " "
 							+ cbType.getText() + "Carnet.Type: "
 							+ product.getName());
 					cbType.select(sel);
-					System.out.println("selectType: "
+					LOG.debug("selectType: "
 							+ cbType.getSelectionIndex() + " "
 							+ cbType.getText() + "Carnet.Type: "
 							+ product.getName());
@@ -1534,12 +1589,12 @@ public class CarnetApplication {
 			int sel = 0;
 			for (String item : cbTarget.getItems()) {
 				if (item.equals(target.getName())) {
-					System.out.println("selectTarget: "
+					LOG.debug("selectTarget: "
 							+ cbTarget.getSelectionIndex() + " "
 							+ cbTarget.getText() + " Carnet.target: "
 							+ target.getName());
 					cbTarget.select(sel);
-					System.out.println("selectTarget: "
+					LOG.debug("selectTarget: "
 							+ cbTarget.getSelectionIndex() + " "
 							+ cbTarget.getText() + " Carnet.target: "
 							+ target.getName());
@@ -1645,11 +1700,11 @@ public class CarnetApplication {
 			table.getColumn(i).pack();
 		}
 
-		System.out.println(table.getColumn(0).getWidth());
+		LOG.debug(table.getColumn(0).getWidth());
 		table.getColumn(0).setWidth((int) (table.getSize().x * 0.6));
 		table.getColumn(1).setWidth(
 				table.getSize().x - table.getColumn(0).getWidth() - 4);
-		System.out.println(table.getColumn(0).getWidth());
+		LOG.debug(table.getColumn(0).getWidth());
 
 	}
 }

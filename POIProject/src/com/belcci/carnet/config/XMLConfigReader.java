@@ -8,6 +8,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.belcci.carnet.form.CarnetApplication;
 import com.belcci.carnet.model.Address;
 import com.belcci.carnet.model.Country;
 import com.belcci.carnet.model.CountryList;
@@ -71,6 +72,7 @@ public class XMLConfigReader extends ConfigReader {
 			filename = configFileName;
 			reader = new XMLConfigReader();
 		}
+		CarnetApplication.LOG.info("Config file name: " + configFileName);
 		return reader;
 	}
 
