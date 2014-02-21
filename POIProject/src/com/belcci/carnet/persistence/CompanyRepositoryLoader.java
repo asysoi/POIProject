@@ -87,8 +87,6 @@ public class CompanyRepositoryLoader {
 							company.setFax(fax);
 						} else if ("email".equals(tagname)) {
 							company.setEmail(tagvalue);
-						} else if ("trust".equals(tagname)) {
-							company.setTrust(tagvalue);
 						} else if ("address".equals(tagname)) {
 							Address addr = getAddress(item);
 							System.out.println(addr.toXML());

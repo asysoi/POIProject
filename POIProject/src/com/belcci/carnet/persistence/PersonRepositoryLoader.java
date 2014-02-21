@@ -91,8 +91,6 @@ public class PersonRepositoryLoader {
 							person.setFax(fax);
 						} else if ("email".equals(tagname)) {
 							person.setEmail(tagvalue);
-						} else if ("trust".equals(tagname)) {
-							person.setTrust(tagvalue);
 						} else if ("address".equals(tagname)) {
 							Address addr = getAddress(item);
 							System.out.println(addr.toXML());

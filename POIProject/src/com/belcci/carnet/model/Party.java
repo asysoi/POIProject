@@ -15,7 +15,6 @@ public class Party {
 	private Phone phone;
 	private Phone fax;
 	private String email  = "";
-	private String trust  = "";
 	private Party bank;
 	private String account  = "";
 	private String bankcode  = "";
@@ -102,15 +101,7 @@ public class Party {
 
 		return strbuffer.toString().toCharArray();
 	}
-
-	public String getTrust() {
-		return trust;
-	}
-
-	public void setTrust(String trust) {
-		this.trust = trust;
-	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -169,7 +160,6 @@ public class Party {
 		party.setPhone(phone  != null ? (Phone) phone.clone() : null);
 		party.setFax(fax != null ? (Phone) fax.clone() : null);
 		party.setEmail(email);
-		party.setTrust(trust);
 		party.setBank(bank != null ? (Party) bank.clone() : null);
 		party.setAccount(account);
 		party.setBankcode(bankcode);

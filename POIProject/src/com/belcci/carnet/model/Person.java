@@ -93,7 +93,6 @@ public class Person extends Party {
 		party.setFax(this.getFax() != null ? (Phone) this.getFax().clone()
 				: null);
 		party.setEmail(this.getEmail());
-		party.setTrust(this.getTrust());
 		party.setBank(this.getBank() != null ? (Party) this.getBank().clone()
 				: null);
 		party.setAccount(this.getAccount());

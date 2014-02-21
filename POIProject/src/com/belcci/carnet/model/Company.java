@@ -30,9 +30,9 @@ public class Company extends Party {
 	public char[] toXML() {
 		StringBuffer strbuffer = new StringBuffer();
 		strbuffer.append(super.toXML());
-		strbuffer.append(director != null ? director.toXML() : ""); 
-		strbuffer.append(presenter != null ? presenter.toXML() : "");
-		strbuffer.append(reciever != null ? reciever.toXML() : "");
+		strbuffer.append(director != null ? director.getPerson().toXML() : ""); 
+		strbuffer.append(presenter != null ? presenter.getPerson().toXML() : "");
+		strbuffer.append(reciever != null ? reciever.getPerson().toXML() : "");
 		return strbuffer.toString().toCharArray();
 	}
       
@@ -50,7 +50,6 @@ public class Company extends Party {
 		party.setFax(this.getFax() != null ? (Phone) this.getFax().clone()
 				: null);
 		party.setEmail(this.getEmail());
-		party.setTrust(this.getTrust());
 		party.setBank(this.getBank() != null ? (Party) this.getBank().clone()
 				: null);
 		party.setAccount(this.getAccount());

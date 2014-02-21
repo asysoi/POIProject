@@ -23,6 +23,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 import com.belcci.carnet.model.Address;
+import com.belcci.carnet.model.AddressType;
 import com.belcci.carnet.model.Country;
 import com.belcci.carnet.model.CountryList;
 import com.belcci.carnet.model.Passport;
@@ -62,6 +63,7 @@ public class PersonForm extends Dialog {
 	private Button chkEnglish;
 	private boolean isModified = false;
 	private boolean isSaved = false;
+	private Address haddr;
 
 	/**
 	 * Create the dialog.
@@ -133,6 +135,7 @@ public class PersonForm extends Dialog {
 		button_1.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+				setSaved(false);
 				shell.close();
 			}
 		});
@@ -519,14 +522,13 @@ public class PersonForm extends Dialog {
 	}
 
 	protected Address getAddress() {
-		Address addr;
-		if (person.getAddresses().size() > 0) {
-			addr = person.getAddresses().get(0);
-		} else {
-			addr = new Address();
-			person.getAddresses().add(addr);
+		if (haddr == null) {
+		   Address addr = new Address();
+		   addr.setType(AddressType.HOME);
+		   person.getAddresses().add(addr);
+		   haddr = addr;
 		}
-		return addr;
+		return haddr;
 	}
 
 	private void fillInCountryList() {
@@ -568,12 +570,15 @@ public class PersonForm extends Dialog {
 
 				if (person.getAddresses().size() > 0
 						&& person.getAddresses().get(0) != null) {
-					Address adr = person.getAddresses().get(0);
-					txtCity.setText(adr.getEcity());
-					txtIndex.setText(adr.getIndex());
-					txtLine.setText(adr.getEline());
-					txtHouse.setText(adr.getHouse());
-					txtOffice.setText(adr.getOffice());
+					Address adr = person.findAddressByType(AddressType.HOME) ;
+					if (adr != null) {
+						txtCity.setText(adr.getEcity());
+						txtIndex.setText(adr.getIndex());
+						txtLine.setText(adr.getEline());
+						txtHouse.setText(adr.getHouse());
+						txtOffice.setText(adr.getOffice());
+						haddr = adr;
+					}
 				} else {
 					emptyAddress();
 				}
@@ -603,12 +608,15 @@ public class PersonForm extends Dialog {
 
 				if (person.getAddresses().size() > 0
 						&& person.getAddresses().get(0) != null) {
-					Address adr = person.getAddresses().get(0);
-					txtCity.setText(adr.getCity());
-					txtIndex.setText(adr.getIndex());
-					txtLine.setText(adr.getLine());
-					txtHouse.setText(adr.getHouse());
-					txtOffice.setText(adr.getOffice());
+					Address adr = person.findAddressByType(AddressType.HOME) ;
+					if (adr != null) {
+						txtCity.setText(adr.getCity());
+						txtIndex.setText(adr.getIndex());
+						txtLine.setText(adr.getLine());
+						txtHouse.setText(adr.getHouse());
+						txtOffice.setText(adr.getOffice());
+						haddr = adr;
+					}
 				} else {
 					emptyAddress();
 				}
