@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<repository>
+<person>
+<id>1</id>
+<firstname>Иван</firstname>
+<lastname>Иванов</lastname>
+<middlename>Иваныч</middlename>
+<phone>12345677</phone>
+<fax>56764673</fax>
+<email>ttt@rrr.by</email>
+<address> 
+	<country>Belarus</country>
+  	<index>220015</index>
+  	<line>Захарова</line>
+  	<house>34</house>
+  	<office>45</office>
+  	<city>Минск</city>
+</address>
+<passport>
+	<personalid>123456789</personalid>
+	<code>MP</code>
+	<number>566634</number>
+	<issdate>18.12.11</issdate>
+	<validdate>16.12.21</validdate>
+	<issued>Фрунзенский РОВД г. Минска</issued>
+	<eissued>Frunsensky ROVD Minsk</eissued>
+</passport>
+</person>
+
+<person>
+<id>2</id>
+<firstname>Семен</firstname>
+<lastname>Сидоров</lastname>
+<middlename>Семеныч</middlename>
+<phone>12345677</phone>
+<fax>56764673</fax>
+<email>top@tut.by</email>
+<address> 
+  	<country>Belarus</country>
+  	<index>220015</index>
+  	<line>Платонова</line>
+  	<house>34</house>
+  	<office>45</office>
+  	<city>Минск</city>
+</address>
+<passport>
+	<personalid>444456789</personalid>
+	<code>MP</code>
+	<number>7834564</number>
+	<issdate>10.06.04</issdate>
+	<validdate>16.12.1 4</validdate>
+	<issued>Ленинский РОВД г. Минска</issued>
+	<eissued>Leninsky ROVD Minsk</eissued>
+</passport>
+</person>
+</repository>

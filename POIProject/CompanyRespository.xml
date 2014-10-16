@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<repository>
+<company>
+<name>Беларусьфильм</name>
+<unp>1234567890</unp>
+<phone>12345677</phone>
+<fax>56764673</fax>
+<email>ttt@rrr.by</email>
+<trust>89066666</trust>
+<address> 
+  <country>Belarus</country>
+  <index>220015</index>
+  <line>Захарова</line>
+  <house>34</house>
+  <office>45</office>
+  <city>Минск</city>
+</address>
+</company>
+<company>
+<name>Белнефтехим</name>
+<unp>1234567890</unp>
+<phone>12345677</phone>
+<fax>56764673</fax>
+<email>top@tut.by</email>
+<trust>89066666</trust>
+<address> 
+  <country>Belarus</country>
+  <index>220015</index>
+  <line>Платонова</line>
+  <house>34</house>
+  <office>45</office>
+  <city>Минск</city>
+</address>
+</company>
+</repository>

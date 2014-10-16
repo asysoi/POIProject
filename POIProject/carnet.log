@@ -1,0 +1,96 @@
+2014-02-20 14:53:29,431 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:32:29,361 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:34:25,057 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:37:29,041 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:37:29,164 [INFO ] CarnetATA - Config file name: "D:\Asysoi\CarnetATA\test\CarnetConfig.xml"
+2014-02-20 15:44:00,926 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:44:01,049 [INFO ] CarnetATA - Config file name: "D:\Asysoi\CarnetATA\test\CarnetConfig.xml"
+2014-02-20 15:44:27,659 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 15:45:08,943 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:45:09,101 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 15:45:59,518 [INFO ] CarnetATA - Config file name: null
+2014-02-20 15:46:53,824 [INFO ] CarnetATA - Config file name: null
+2014-02-20 15:54:11,820 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:54:11,980 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 15:56:14,502 [INFO ] CarnetATA - Read application config file
+2014-02-20 15:56:14,663 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:24:10,561 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:24:10,726 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:25:49,079 [INFO ] CarnetATA - Config file name: null
+2014-02-20 16:32:39,899 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:32:40,059 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:32:55,316 [INFO ] CarnetATA - Config file name: null
+2014-02-20 16:33:16,890 [INFO ] CarnetATA - 
+2014-02-20 16:33:21,519 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:33:21,682 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:33:35,130 [INFO ] CarnetATA - Config file name: null
+2014-02-20 16:36:34,497 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:36:34,656 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:37:27,155 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:37:27,315 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:37:35,393 [INFO ] CarnetATA - Printer not found
+2014-02-20 16:38:21,578 [INFO ] CarnetATA - Read application config file
+2014-02-20 16:38:21,738 [INFO ] CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:38:45,926 [INFO ] CarnetATA - Config file name: null
+2014-02-20 16:39:35,057 [INFO ] CarnetATA - Printer not found
+2014-02-20 16:41:06,973 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-20 16:41:07,134 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:41:25,311 [INFO ] (CarnetApplication.java:243) CarnetATA - Printer not found
+2014-02-20 16:45:17,749 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 16:45:17,912 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:47:48,571 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 16:47:48,734 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:56:43,405 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 16:56:43,560 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:59:05,682 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 16:59:05,843 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 16:59:24,937 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: null
+2014-02-20 17:00:45,554 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 17:00:45,715 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 17:00:57,024 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: null
+2014-02-20 17:08:48,090 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 17:08:48,252 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 17:11:42,397 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 17:11:42,559 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 17:20:39,353 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 17:20:39,514 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 17:54:08,559 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 17:54:08,722 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 18:12:19,639 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 18:12:19,802 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 19:00:05,357 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 19:00:05,517 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 19:26:38,058 [INFO ] (CarnetApplication.java:251) CarnetATA - Read application config file
+2014-02-20 19:26:38,218 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 19:26:55,180 [INFO ] (CarnetApplication.java:242) CarnetATA - 
+2014-02-20 19:29:34,656 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-20 19:29:34,819 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-20 19:29:49,679 [INFO ] (CarnetApplication.java:243) CarnetATA - 
+2014-02-20 19:32:30,133 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-20 19:32:30,294 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 10:13:58,898 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 10:13:59,059 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 10:15:27,516 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 10:15:27,678 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 10:23:46,399 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 10:23:46,560 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 10:27:08,809 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 10:27:08,969 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 10:42:58,616 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 10:42:58,777 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 15:06:30,663 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 15:06:30,823 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 15:28:28,473 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 15:28:28,634 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 15:32:47,657 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 15:32:47,818 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 15:46:19,083 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 15:46:19,244 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 15:47:23,461 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 15:47:23,621 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 16:02:56,669 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 16:02:56,831 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 17:14:31,383 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 17:14:31,546 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
+2014-02-21 17:56:25,977 [INFO ] (CarnetApplication.java:252) CarnetATA - Read application config file
+2014-02-21 17:56:26,137 [INFO ] (XMLConfigReader.java:75) CarnetATA - Config file name: D:\Asysoi\CarnetATA\test\CarnetConfig.xml
